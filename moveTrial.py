@@ -1,5 +1,5 @@
 import pygame
-
+import time
 pygame.init()
 
 
@@ -10,16 +10,10 @@ game_screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Movement Trial')
 # game_screen.fill(GREEN)
 
-walkRight = [pygame.image.load('images/R1.png'), pygame.image.load('images/R2.png'),
-             pygame.image.load('images/R3.png'), pygame.image.load('images/R4.png'),
-             pygame.image.load('images/R5.png'), pygame.image.load('images/R6.png'),
-             pygame.image.load('images/R7.png'), pygame.image.load('images/R8.png'),
-             pygame.image.load('images/R9.png')]
-walkLeft = [pygame.image.load('images/L1.png'), pygame.image.load('images/L2.png'),
-            pygame.image.load('images/L3.png'), pygame.image.load('images/L4.png'),
-            pygame.image.load('images/L5.png'), pygame.image.load('images/L6.png'),
-            pygame.image.load('images/L7.png'), pygame.image.load('images/L8.png'),
-            pygame.image.load('images/L9.png')]
+walkRight = [pygame.image.load('images/small_mario/R1.gif'), pygame.image.load('images/small_mario/R2.gif'),
+             pygame.image.load('images/small_mario/R3.gif')]
+walkLeft = [pygame.image.load('images/small_mario/L1.gif'), pygame.image.load('images/small_mario/L2.gif'),
+            pygame.image.load('images/small_mario/L3.gif')]
 
 pacRight = [pygame.image.load('Pacman/r1.png'), pygame.image.load('Pacman/r2.png')]
 pacLeft = [pygame.image.load('Pacman/L1.png'), pygame.image.load('Pacman/L2.png')]
@@ -29,11 +23,11 @@ pacDown = [pygame.image.load('Pacman/D1.png'), pygame.image.load('Pacman/D2.png'
 
 pacman = pygame.image.load('Pacman/standby.png')
 
-bg = pygame.image.load('images/bg.jpg')
+bg = pygame.image.load('images/bgTest.jpg')
 
-char = pygame.image.load('images/standing.png')
+char = pygame.image.load('images/small_mario/R1.gif')
 
-playerImage = pygame.image.load('images/standing.png')
+playerImage = pygame.image.load('images/small_mario/R1.gif')
 player = playerImage.get_rect()
 
 # Clock to control fps
@@ -66,10 +60,10 @@ def redraw_window():
         walkCount = 0
 
     if left:
-        game_screen.blit(pacLeft[walkCount % 2], (x, y))
+        game_screen.blit(walkLeft[walkCount % 2], (x, y))
         walkCount += 1
     elif right:
-        game_screen.blit(pacRight[walkCount % 2], (x, y))
+        game_screen.blit(walkRight[walkCount % 2], (x, y))
         walkCount += 1
     elif up:
         game_screen.blit(pacUp[walkCount % 2], (x, y))
@@ -78,7 +72,7 @@ def redraw_window():
         game_screen.blit(pacDown[walkCount % 2], (x, y))
         walkCount += 1
     else:
-        game_screen.blit(pacman, (x, y))
+        game_screen.blit(char, (x, y))
 
     pygame.display.update()
 
@@ -86,7 +80,7 @@ def redraw_window():
 game_running = True
 # Main loop
 while game_running:
-    clock.tick(27)
+    clock.tick(25)
 
     # Event loop
     for event in pygame.event.get():
